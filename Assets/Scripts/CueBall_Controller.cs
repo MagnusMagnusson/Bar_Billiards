@@ -205,5 +205,10 @@ public class CueBall_Controller : MonoBehaviour {
 		return new List<GameObject>(myballs);
 	}
 	public class NoBallException : System.Exception { };
+
+	public GameObject getCurrentBall()
+	{
+		return nowshooting;
+	}
 }
 				  
