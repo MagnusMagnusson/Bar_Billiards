@@ -34,7 +34,7 @@ public class Agent : MonoBehaviour {
 				{
 					Vector3 holePos = hole.transform.position;
 					holePos.y = ball.transform.position.y;
-					Vector3 maybe = potentialGoodShot(holePos, ball, myBall);
+					Vector3 maybe = PotentialGoodShot(holePos, ball, myBall);
 
 					Debug.Log(maybe + " : " + ball.transform.position + " to " + holePos);
 				}
@@ -43,11 +43,11 @@ public class Agent : MonoBehaviour {
 		}
 	}
 
-	Vector3 potentialGoodShot(Vector3 hole, GameObject testBall,GameObject myBall)
+	Vector3 PotentialGoodShot(Vector3 hole, GameObject testBall,GameObject myBall)
 	{
 		Vector3 to = (hole - testBall.transform.position).normalized;
-		raytracer.setParam(hole, -to);
-		Raytracer.objectAngle result = raytracer.castIgnore(testBall);			
+		raytracer.SetParam(hole, -to);
+		Raytracer.ObjectAngle result = raytracer.CastIgnore(testBall);			
 		Debug.Log(result.Object);
 		if (result.Object == Plane)
 		{													  

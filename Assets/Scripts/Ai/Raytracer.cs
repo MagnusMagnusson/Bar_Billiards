@@ -15,11 +15,11 @@ public class Raytracer
 
 	private int reflectionCount = 5;
 
-	public void setParam(Vector3 From, Vector3 To) {
+	public void SetParam(Vector3 From, Vector3 To) {
 		this.from = From;
 		this.to = To;
 	}
-	public objectAngle castIgnore(GameObject Ignore)
+	public ObjectAngle CastIgnore(GameObject Ignore)
 	{
 		Ignore.SetActive(false);									  
 		this.ray = new Ray(from, to);
@@ -37,7 +37,7 @@ public class Raytracer
 				else
 				{
 					Ignore.SetActive(true);
-					objectAngle o = new objectAngle();
+					ObjectAngle o = new ObjectAngle();
 					o.DirectionTo = -this.ray.direction;
 					o.Object = hit.transform.gameObject;
 					return o;
@@ -46,13 +46,13 @@ public class Raytracer
 		}
 		Ignore.SetActive(true);
 
-		objectAngle oa = new objectAngle();
+		ObjectAngle oa = new ObjectAngle();
 		oa.DirectionTo = Vector3.zero;
 		oa.Object = null;
 		return oa;
 	}
 
-	public struct objectAngle
+	public struct ObjectAngle
 	{
 		public Vector3 DirectionTo;
 		public GameObject Object;
