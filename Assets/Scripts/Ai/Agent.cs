@@ -27,11 +27,11 @@ public class Agent : MonoBehaviour {
 		if (toggle != lastToggle)
 		{
 			lastToggle = toggle;
-			makeMove();
+			MakeMove();
 		}
 	}
 
-	void makeMove()
+	void MakeMove()
 	{
 		GetIndirectShots();
 		GetDirectShots(); 
@@ -52,8 +52,9 @@ public class Agent : MonoBehaviour {
 				holePos.y = ball.transform.position.y;
 				Move maybe = PotentialGoodShot(holePos, ball, myBall);
 				if (maybe != null && maybe.angle.z <= 0)
-				{			   
-					directShots.Add(maybe);
+                {
+                    Debug.Log("In " + maybe);
+                    directShots.Add(maybe);
 				}
 			}
 		}											  
@@ -73,7 +74,8 @@ public class Agent : MonoBehaviour {
 				holePos.y = ball.transform.position.y;
 				Move maybe = PotentialIndirectShot(holePos, ball, myBall);
 				if (maybe != null && maybe.angle.z <= 0)
-				{					   
+				{
+                    Debug.Log("In " + maybe);
 					indirectShots.Add(maybe);
 				}
 			}

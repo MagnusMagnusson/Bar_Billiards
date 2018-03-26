@@ -9,39 +9,40 @@ public class pegController : MonoBehaviour {
 	private Vector3 startVec;
 	private Quaternion startQ;
 
+    private bool frozen;
+
 	void Start()
 	{
 		startVec = GetComponent<Rigidbody>().transform.position;
-		startQ = GetComponent<Rigidbody>().rotation;
+        startQ = Quaternion.Euler(0, 0, 0);
+        frozen = false;
 	}
-	void OnTriggerEnter(Collider other)
+
+    private void Update()
+    {
+        if (frozen)
+        { 
+            Rigidbody R = GetComponent<Rigidbody>();
+            R.rotation = startQ;
+            R.transform.position = startVec;
+            R.velocity = new Vector3(0, 0, 0);
+            R.angularVelocity = new Vector3(0, 0, 0);
+        }
+    }
+    void OnTriggerEnter(Collider other)
 	{
 		ctrl.instance.foul(PegOfDoom);
 	}		  
 	public void reset()
 	{
-		Rigidbody R = GetComponent<Rigidbody>();
-		R.transform.position = startVec;
-		R.rotation = startQ;
-		R.velocity = new Vector3(0, 0, 0);
-		R.angularVelocity =new  Vector3(0, 0, 0);
-		Invoke("StopMovement", .25f);
-	}
-	private void StopMovement()
-	{	  
-		Rigidbody R = GetComponent<Rigidbody>();
-		R.freezeRotation = true;
-		R.isKinematic = true;		   
+        Rigidbody R = GetComponent<Rigidbody>();
+        frozen = true;
+        R.velocity = new Vector3(0, 0, 0);
+		R.angularVelocity =new Vector3(0, 0, 0);
 	}
 
 	public void ResetMovement()
 	{
-		Rigidbody R = GetComponent<Rigidbody>();
-		R.freezeRotation = false;
-		R.isKinematic = false;
-		R.transform.position = startVec;
-		R.rotation = startQ;
-		R.velocity = new Vector3(0, 0, 0);
-		R.angularVelocity = new Vector3(0, 0, 0);
+        frozen = false;
 	}
 }
